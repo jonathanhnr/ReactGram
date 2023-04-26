@@ -1,9 +1,9 @@
-import {resetMessage} from "../slices/photoSlice";
+import { resetMessage } from '../slices/photoSlice';
 
-export const useResetComponentMessage = (dispatch) => {
-    return ()=> {
-        setTimeout(() => {
-            dispatch(resetMessage())
-        }, 2000)
-    }
-}
+export const useResetComponentMessage = dispatch => {
+  return () => {
+    setTimeout(() => {
+      dispatch(resetMessage());
+    }, 2000);
+  };
+};

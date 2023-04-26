@@ -58,7 +58,9 @@ const deletePhoto = async (req, res) => {
 }
 
 const getAllPhotos = async (req, res) => {
-    const photos = await Photo.find({}).sort([["createdAt", -1]]).exec()
+    const photos = await Photo.find({}).sort([["createdAt", -1]]).populate("userId","profileImage")
+        .populate("likes")
+        .exec()
 
     return res.status(200).json(photos)
 
@@ -76,7 +78,9 @@ const getUserPhotos = async (req, res) => {
 // get photo by id
 const getPhotoById = async (req, res) => {
     const {id} = req.params
-    const photo = await Photo.findById(mongoose.Types.ObjectId(id))
+    const photo = await Photo.findById(mongoose.Types.ObjectId(id)).populate("userId","profileImage")
+      .populate("likes")
+      .exec()
 
     //check if photo exists
     if (!photo) {
@@ -125,16 +129,17 @@ const likePhoto = async (req, res) => {
 
     //check if user already liked the photo
     if (photo.likes.includes(reqUser._id)) {
-        res.status(404).json({errors: ["voce ja curiu a foto"]})
-        return
+        photo.likes = photo.likes.filter((userId) => !userId.equals(reqUser.id))
+    } else {
+        //put user id in likes array
+        photo.likes.push(reqUser._id)
     }
 
-    //put user id in likes array
-    photo.likes.push(reqUser._id)
+    const updatedPhoto = await photo.save()
 
-    photo.save()
+    const photoWithLikes = await updatedPhoto.populate('likes')
 
-    res.status(200).json({photoId: id, userId: reqUser._id, message: "a foto foi curtida"})
+    res.status(200).json({photoId: id, likes: photoWithLikes.likes, userId: reqUser._id, message: "a foto foi curtida"})
 
 }
 

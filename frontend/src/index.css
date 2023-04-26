@@ -1,75 +1,68 @@
-body{
-    font-family: "Roboto",  sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: #121212;
-    color: #fafafa;
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #121212;
+  color: #fafafa;
 }
-a{
-    color: #fafafa;
-    text-decoration: none;
+a {
+  font-size: 12px;
+  font-weight: bold;
+  color: #d0cccc;
+  text-decoration: none;
 }
-.active{
-    font-weight: bold;
+p{
+  color: #cfcaca;
+  font-size: 13px;
 }
-ul{
-    list-style: none;
+h2 {
+  color: #818181;
+  font-size: 13px;
 }
-form{
-    display: flex;
-    flex-direction: column;
+.active {
+  font-weight: bold;
 }
-label{
-    display: flex;
-    flex-direction: column;
-    text-align: left;
+ul {
+  list-style: none;
 }
-label span{
-    font-weight: bold;
-    margin-bottom: .5em;
-    color: #aaa;
-    font-size: .7em;
+form {
+  display: flex;
 }
-input{
-    background-color: #3b3b3b;
-    color: #aaa;
-    border: 1px solid #555;
-    border-radius: 2px;
-    padding: 10px 8px;
-    outline: none;
-    margin-bottom: .6em;
+label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
-input::placeholder{
-    color: #aaa;
+label span {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: #aaa;
+  font-size: 0.7em;
 }
-.btn,
-button,
-input[type="submit"]{
-    background-color: #0094f6;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 8px;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: .8;
-    font-size: 1em;
+input {
+  background-color: #3b3b3b;
+  color: #aaa;
+  border: 1px solid #555;
+  border-radius: 2px;
+  padding: 10px 8px;
+  outline: none;
 }
-input[type="submit"]{
-    margin-top: 1em;
+input::placeholder {
+  color: #aaa;
 }
-input:disabled{
-    cursor: not-allowed;
-    background-color: black;
+
+input:disabled {
+  cursor: not-allowed;
+  background-color: black;
 }
 button:hover,
-input[type="submit"]:hover{
-    opacity: 1;
+input[type='submit']:hover {
+  opacity: 1;
 }
-.cancel-btn{
-    background-color: #ccc;
+.cancel-btn {
+  background-color: #ccc;
 }
-.hide{
-    display: none;
+.hide {
+  display: none;
 }

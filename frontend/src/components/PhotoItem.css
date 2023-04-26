@@ -1,16 +1,17 @@
-.photo-item img{
-    margin-top: 50px;
-    width: 100%;
+.photo-item img {
+  width: 100%;
+}
+.photo-item {
+  background-color: black;
 }
 
-#home .photo-item h2{
-    margin-bottom: .2em;
+.photo-author {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
-.photo-author{
-    text-align: left;
-}
-
-.photo-author a{
-    font-weight: bold;
+.photo-author a {
+  font-weight: bold;
 }

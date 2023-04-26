@@ -1,19 +1,35 @@
-.like{
-    display: flex;
-    align-items: center;
-    border-top: 1px solid #363636;
-    border-bottom: 1px solid #363636;
+.like {
+  display: contents;
+  align-items: center;
+}
+.like .icons{
+  display: flex;
+  gap: 10px;
+}
+.like .photo-user{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.like .like-text{
+  align-items: center;
+  margin-top: 1px;
+  display: flex;
+  gap: 7px;
+}
+.icons span:hover{
+  color: #6a6969;
 }
 
-#home .like{
-    border: none;
+#home .like {
+  border: none;
 }
 
 .like svg {
-    font-size: 1.5em;
-    cursor: pointer;
+  font-size: 1.2em;
+  cursor: pointer;
 }
 
-.like p{
-    margin-left: 1em;
+.like p {
+  font-size: 13px;
 }

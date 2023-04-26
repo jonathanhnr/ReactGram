@@ -1,0 +1,24 @@
+.form{
+    display: flex;
+    width: 100%;
+}
+.input-comment{
+    background-color: black;
+    border: tan;
+    width: 100%;
+    color: #aaa;
+    padding: 10px 8px;
+    outline: none;
+    border-bottom-left-radius: 10px;
+}
+.input-submit{
+    color: rgba(102, 146, 204, 0.86);
+    padding: 10px 8px;
+    outline: none;
+    background-color: black;
+    border: aliceblue;
+    border-bottom-right-radius: 10px;
+}
+.input-submit:hover{
+    color: #0094f6;
+}
