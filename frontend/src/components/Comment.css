@@ -1,8 +1,9 @@
-.form{
+.comment {
     display: flex;
     width: 100%;
 }
-.input-comment{
+
+.input-comment {
     background-color: black;
     border: tan;
     width: 100%;
@@ -11,7 +12,8 @@
     outline: none;
     border-bottom-left-radius: 10px;
 }
-.input-submit{
+
+.input-submit {
     color: rgba(102, 146, 204, 0.86);
     padding: 10px 8px;
     outline: none;
@@ -19,6 +21,63 @@
     border: aliceblue;
     border-bottom-right-radius: 10px;
 }
-.input-submit:hover{
+
+.input-submit:hover {
     color: #0094f6;
+}
+
+.comment-item {
+    justify-content: space-between;
+    align-items: center;
+    overflow: auto;
+    display: flex;
+    gap: 5px;
+    padding: 10px;
+}
+.delete{
+    font-size: 8px;
+    color: gray;
+}
+.delete:hover{
+    color: white;
+}
+
+.message-container {
+    margin: 1em 0;
+}
+
+.comments-item {
+    height: 220px;
+    overflow-y: scroll;
+}
+.comments-item::-webkit-scrollbar{
+    width: 8px;
+}
+
+.comments {
+    margin-bottom: 2em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #363636;
+}
+
+.content-comment {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.btnt{
+    cursor: pointer;
+}
+
+.author {
+    gap: 10px;
+    align-items: center;
+    display: flex;
+    font-weight: bold;
+}
+
+.author img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 }

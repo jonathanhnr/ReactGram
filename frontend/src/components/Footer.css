@@ -1,8 +1,53 @@
 #footer {
   background-color: #121212;
-  height: 200px;
+  height: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-top: 1px solid #363636;
+}
+.footer-photo{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+@media(max-width: 400px){
+  .footer-photo{
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.footer-links {
+  border-top: 1px solid #2a2a2a;
+  display: none;
+  padding: 10px;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  bottom: -18px;
+  align-items: center;
+  background-color: black;
+}
+@media(max-width: 500px){
+  .footer-links{
+    display: flex;
+  }
+}
+
+.footer-links span {
+  cursor: pointer;
+  color: white;
+  margin: 20px 20px 10px 10px ;
+}
+.footer-links svg {
+  font-size: 22px;
+}
+@media(max-width: 400px){
+  .footer-links svg{
+    font-size: 20px;
+  }
+}
+.footer-links svg:hover{
+  font-size: 20px;
 }

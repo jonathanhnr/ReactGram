@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { firstName } from '../helpers/strings';
 
-const CommentItem = ({ photo, comments }) => {
+const CommentItem = ({ photo, comments , onComment}) => {
   const comment = comments;
   const ultimo = useMemo(() => {
     if (comment?.length > 0) {
@@ -26,9 +26,9 @@ const CommentItem = ({ photo, comments }) => {
                 </>
               ) : (
                 <div>
-                  <Link to={`/photos/${photo._id}`}>
-                   <h2> {`ver todos os ${comment.length} comentarios`}</h2>
-                  </Link>
+                  <button className={"btnt"} onClick={onComment}>
+                   <h2> {`ver todos os comentarios`}</h2>
+                  </button>
                   <div className={"content-comment"}>
                     <Link to={`/users/${ultimo?.userId}`}>
                       {firstName(ultimo?.userName)}

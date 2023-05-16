@@ -6,7 +6,7 @@ import {
   BsSearch,
   BsFillPersonFill,
   BsFillCameraFill,
-  BsHouseDoorFill,
+  BsHouseDoorFill
 } from 'react-icons/bs';
 
 //HOOKS
@@ -17,12 +17,16 @@ import { useNavigate } from 'react-router-dom';
 
 //Redux
 import { logout, reset } from '../slices/authSlice';
+import { uploads } from '../utils/config';
+import Avatar from './Avatar';
+import ShareModal from './ShareModal';
 
 const NavBar = () => {
   const { auth } = useAuth();
   const { user } = useSelector(state => state.auth);
 
   const [query, setQuery] = useState('');
+  const [activeModal, setActiveModal] = useState(false)
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,37 +48,51 @@ const NavBar = () => {
 
   return (
     <nav id="nav">
-      <Link to="/">ReactGram</Link>
-      <form id="search-form" onSubmit={handleSearch}>
-        <BsSearch />
+      <Link style={{marginRight:"10px"}} to="/">ReactGram</Link>
+      <form className={'search-form'} onSubmit={handleSearch}>
+        <BsSearch className={'search-svg'} />
         <input
+          className={'search-input'}
           type="text"
           placeholder={'Pesquisar'}
           onChange={e => setQuery(e.target.value)}
         />
       </form>
-      <ul id="nav-links">
+      <ul className={'nav-links'}>
         {auth ? (
           <>
             <li>
               <NavLink to="/">
-                <BsHouseDoorFill />
+                <div className={'content-links'}>
+                  <BsHouseDoorFill />
+                </div>
               </NavLink>
             </li>
             {user && (
               <li>
-                <NavLink to={`/users/${user._id}`}>
-                  <BsFillCameraFill />
-                </NavLink>
+                <div className={"content-links"}>
+                  <a onClick={() => setActiveModal(true)}>
+                    <BsFillCameraFill />
+                  </a>
+                  {activeModal &&(
+                    <ShareModal onClose={() => setActiveModal(null)} uploads={uploads} user={user}/>
+                  )}
+                </div>
               </li>
             )}
             <li>
-              <NavLink to={'/profile'}>
-                <BsFillPersonFill />
+              <NavLink to={`/users/${user._id}`}>
+                <div className={'content-links'}>
+                  <Avatar
+                    size={'P'}
+                    src={`${uploads}/users/${user.profileImage}`}
+                    border={"R"}
+                  />
+                </div>
               </NavLink>
             </li>
             <li>
-              <span onClick={handleLogout}>Sair</span>
+              <span style={{marginRight:"10px"}} onClick={handleLogout}>Sair</span>
             </li>
           </>
         ) : (

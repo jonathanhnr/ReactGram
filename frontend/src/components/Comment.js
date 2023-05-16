@@ -30,7 +30,7 @@ const Comment = ({ photo }) => {
 
   return (
     <>
-      <form className={"form"} onSubmit={handleComment}>
+      <form className={"comment"} onSubmit={handleComment}>
           <input
             className={"input-comment"}
             type='text'

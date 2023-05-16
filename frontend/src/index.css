@@ -4,7 +4,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   background-color: #121212;
-  color: #fafafa;
+  color: black;
 }
 a {
   font-size: 12px;
@@ -19,9 +19,6 @@ p{
 h2 {
   color: #818181;
   font-size: 13px;
-}
-.active {
-  font-weight: bold;
 }
 ul {
   list-style: none;
@@ -54,14 +51,16 @@ input::placeholder {
 
 input:disabled {
   cursor: not-allowed;
-  background-color: black;
 }
 button:hover,
 input[type='submit']:hover {
   opacity: 1;
 }
 .cancel-btn {
-  background-color: #ccc;
+  padding: 4px 12px;
+  color: white;
+  border-radius:10px;
+  background-color: rgb(0, 149, 246);
 }
 .hide {
   display: none;

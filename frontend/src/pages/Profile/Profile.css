@@ -1,48 +1,144 @@
 #profile {
-  width: 50%;
-  margin: 0 auto;
+    width: 90%;
+    margin: 0 auto;
 }
-.profile-header {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1em;
-  border-bottom: 1px solid #363636;
-}
-.profile-header img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-right: 2em;
-}
-.new-photo {
-  padding: 1em;
-  border-bottom: 1px solid #363636;
-}
-.photos-container {
-  display: flex;
-  flex-wrap: wrap;
-}
-.photo {
-  width: 32%;
-  margin: 0.3%;
-}
-.photo img {
-  width: 100%;
-}
-.actions {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-.actions svg {
-  cursor: pointer;
-}
-.edit-photo {
-  margin-bottom: 1em;
-}
-.edit-photo img {
 
-  width: 100%;
-  margin-bottom: 1em;
+.profile-header {
+    gap: 80px;
+    display: flex;
+    flex-wrap: wrap;
+}
+@media(max-width: 420px) {
+    .profile-header{
+        gap: 20px;
+        flex-wrap: initial;
+    }
+}
+
+.btn-edit {
+    color: black;
+    background-color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 8px 12px 8px 12px;
+}
+
+.btn-edit:hover {
+    background-color: #c1bebe;
+}
+
+.profile-header img {
+    width: 160px;
+    height: 120px;
+    border-radius: 50%;
+}
+
+.profile-description h2 {
+    color: white;
+    font-size: 18px;
+}
+
+.ctn-img {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    border-radius: 50%;
+    border: 2px solid gray;
+    width: 125px;
+    height: 125px;
+}
+
+@media (max-width: 600px) {
+    .ctn-img {
+        width: 105px;
+        height: 105px;
+    }
+}
+
+@media (max-width: 420px) {
+    .ctn-img {
+        width: 85px;
+        height: 85px;
+    }
+}
+
+.new-photo {
+    border: 10px;
+    background-color: #2a2a2a;
+    padding: 1em;
+    border-bottom: 1px solid #363636;
+}
+
+.photos-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.photo {
+    width: 32%;
+    margin: 0.3%;
+}
+@media (max-width: 420px) {
+.photo{
+    width: 100%;
+}
+}
+
+.photo img {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.actions svg {
+    color: white;
+    cursor: pointer;
+}
+
+.edit-photo {
+    border-radius: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.32);
+    background-color: black;
+    margin-bottom: 1em;
+}
+.edit-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.edit-text input{
+    color: white;
+    padding: 5px;
+}
+.edit-text-area{
+    background-color: black;
+    border: none;
+    color: white;
+    font-size: 16px;
+    box-shadow: 0 0 0 0;
+    outline: 0;
+    width: 335px;
+    height: 200px;
+    margin-bottom: 15px;
+}
+@media (max-width: 420px) {
+    .edit-text-area{
+        height: 90px;
+    }
+}
+.edit-container{
+    display: flex;
+    align-items: center;
+    border-top: 1px solid rgba(128, 128, 128, 0.32);
+}
+@media(max-width: 420px){
+    .edit-container{
+        flex-direction: column;
+    }
 }

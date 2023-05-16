@@ -3,8 +3,12 @@
   align-items: center;
 }
 .like .icons{
+  align-items: center;
   display: flex;
   gap: 10px;
+}
+.coracao{
+  color: red;
 }
 .like .photo-user{
   width: 20px;
@@ -17,9 +21,21 @@
   display: flex;
   gap: 7px;
 }
+.icons span{
+  color: white;
+}
+
 .icons span:hover{
   color: #6a6969;
 }
+.icons a{
+  font-size: 1em;
+}
+.icons a:hover{
+   color: #6a6969;
+  width: 40px;
+ }
+
 
 #home .like {
   border: none;

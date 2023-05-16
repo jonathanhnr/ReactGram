@@ -28,26 +28,19 @@
 .container-img {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 6px;
   background-color: black;
+  border-bottom: 1px solid #3b3b3b;
+  padding: 6px;
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 5px;
 }
 .container-img h2 {
   font-size: 0.8rem;
   color: white;
 }
-.container-img img {
-  margin-right: 6px;
-}
-.container-img img {
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 6px;
-}
+
 .container-text {
   padding: 10px;
   background-color: black;

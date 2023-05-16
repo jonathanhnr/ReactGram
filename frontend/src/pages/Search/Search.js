@@ -14,6 +14,7 @@ import { useAuth } from '../../hooks/useAuth';
 
 //redux
 import { searchPhotos, like } from '../../slices/photoSlice';
+import NavBar from '../../components/NavBar';
 
 const Search = () => {
   const { auth, loading: authLoading } = useAuth();
@@ -44,22 +45,25 @@ const Search = () => {
     return <Navigate to="/login" />;
   }
   return (
-    <div id={'search'}>
-      <h2>Voce esta buscando por: {search}</h2>
-      {photos &&
-        photos.map(photo => (
-          <div key={photo._id}>
-            <PhotoItem photo={photo} />
-            <LikeContainer photo={photo} user={user} handleLike={handleLike} />
-            <Link className={'btn'} to={`/photos/${photo._id}`}>
-              Ver mais
-            </Link>
-          </div>
-        ))}
-      {photos && photos.length === 0 && (
-        <h2 className="no-photos">nao foi encontrado nenhum resultado</h2>
-      )}
-    </div>
+   <div className={"container"}>
+   <NavBar/>
+     <div id={'search'}>
+       <h2>Voce esta buscando por: {search}</h2>
+       {photos &&
+         photos.map(photo => (
+           <div key={photo._id}>
+             <PhotoItem photo={photo} />
+             <LikeContainer photo={photo} user={user} handleLike={handleLike} />
+             <Link className={'btn'} to={`/photos/${photo._id}`}>
+               Ver mais
+             </Link>
+           </div>
+         ))}
+       {photos && photos.length === 0 && (
+         <h2 className="no-photos">nao foi encontrado nenhum resultado</h2>
+       )}
+     </div>
+   </div>
   );
 };
 

@@ -3,7 +3,7 @@ const router = express.Router()
 
 //Controller
 const {insertPhoto, deletePhoto, getAllPhotos, getUserPhotos, getPhotoById, updatePhoto, likePhoto, commentPhoto,
-    searchPhotos
+    searchPhotos, deleteComment
 } = require("../controllers/PhotoController")
 //middlewaresb4
 const {photoInsertValidation, photoUpdateValidation, commentValidation} = require("../middlewares/photoValidation")
@@ -22,6 +22,7 @@ router.post(
     insertPhoto
 )
 router.delete('/:id', authGuard,deletePhoto)
+router.delete("/comment/:photoId/:id" , authGuard, deleteComment)
 router.get('/',authGuard, getAllPhotos)
 router.get('/user/:id',authGuard, getUserPhotos)
 router.get("/search", authGuard, searchPhotos)

@@ -25,25 +25,19 @@ function App() {
     return <p>carregando...</p>;
   }
 
-  return (
-    <div className="App">
+  return (<div className='App'>
       <BrowserRouter>
-        <NavBar />
-        <div className="container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<EditProfile />} />
-            <Route path="/users/:id" element={<Profile />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/photos/:id" element={<Photo />} />
-          </Routes>
-        </div>
-        <Footer />
+        <Routes>
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/profile' element={<EditProfile />} />
+          <Route path='/users/:id' element={<Profile />} />
+          <Route path='/search' element={<Search />} />
+          <Route path='/photos/:id' element={<Photo />} />
+        </Routes>
       </BrowserRouter>
-    </div>
-  );
+    </div>);
 }
 
 export default App;

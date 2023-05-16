@@ -7,6 +7,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { profile, resetMessage, updateProfile } from '../../slices/userSlice';
 
 import Message from '../../components/Message';
+import NavBar from '../../components/NavBar';
+import Footer from '../../components/Footer';
+import Avatar from '../../components/Avatar';
 
 const EditProfile = () => {
   const dispatch = useDispatch();
@@ -67,60 +70,74 @@ const EditProfile = () => {
     setProfileImage(image);
   };
 
+
   return (
-    <div id={'edit-profile'}>
-      <h2>Edite seus dados</h2>
-      <p className={'subtitle'}>
-        {' '}
-        Adicionar uma imagem e conte mais sobre você
-      </p>
-      {(user.profileImage || previewImage) && (
-        <img
-          className={'profile-image'}
-          src={
-            previewImage
-              ? URL.createObjectURL(previewImage)
-              : `${uploads}/users/${user.profileImage}`
-          }
-          alt={user.name}
-        />
-      )}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          onChange={e => setName(e.target.value)}
-          value={name || ''}
-        />
-        <input type="email" placeholder="email" disabled value={email || ''} />
-        <label>
-          <span>Imagem do perfil</span>
-          <input type="file" onChange={handleFile} />
-        </label>
-        <label>
-          <span>bio</span>
-          <input
-            type="text"
-            placeholder="Descrição do perfil"
-            onChange={e => setBio(e.target.value)}
-            value={bio || ''}
-          />
-        </label>
-        <label>
-          <span>alter senha</span>
-          <input
-            type="password"
-            placeholder={'Digite sua nova senha.'}
-            onChange={e => setPassword(e.target.value)}
-            value={password || ''}
-          />
-        </label>
-        {!loading && <input type="submit" value={'Atualizar'} />}
-        {loading && <input type="submit" value={'Aguarde...'} disabled />}
-        {error && <Message msg={error} type="error" />}
-        {message && <Message msg={message} type={'success'} />}
-      </form>
-    </div>
+    <>
+      <div className={'container'}>
+        <NavBar />
+        <div id={'edit-profile'}>
+          <h2>Edite seus dados</h2>
+          <p className={'subtitle'}>
+            {' '}
+            Adicionar uma imagem e conte mais sobre você
+          </p>
+          {(user.profileImage || previewImage) && (
+            <>
+              <Avatar
+                size={'G'}
+                border={"R"}
+                src={
+                  previewImage
+                    ? URL.createObjectURL(previewImage)
+                    : `${uploads}/users/${user.profileImage}`
+                }
+              />
+            </>
+          )}
+          <form style={{ flexDirection: 'column' }} onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Nome"
+              onChange={e => setName(e.target.value)}
+              value={name || ''}
+            />
+            <input
+              type="email"
+              placeholder="email"
+              disabled
+              value={email || ''}
+            />
+            <label>
+              <span>Imagem do perfil</span>
+              <input type="file" onChange={handleFile} />
+            </label>
+            <label>
+              <span>bio</span>
+              <input
+                type="text"
+                placeholder="Descrição do perfil"
+                onChange={e => setBio(e.target.value)}
+                value={bio || ''}
+              />
+            </label>
+            <label>
+              <span>alter senha</span>
+              <input
+                type="password"
+                placeholder={'Digite sua nova senha.'}
+                onChange={e => setPassword(e.target.value)}
+                value={password || ''}
+              />
+            </label>
+            {!loading && <input type="submit" value={'Atualizar'} />}
+            {loading && <input type="submit" value={'Aguarde...'} disabled />}
+            {error && <Message msg={error} type="error" />}
+            {message && <Message msg={message} type={'success'} />}
+          </form>
+        </div>
+      </div>
+      <Footer/>
+    </>
   );
 };
 

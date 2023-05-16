@@ -1,0 +1,62 @@
+.AvatarRoot {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    overflow: hidden;
+    user-select: none;
+    background-color: var(--blackA3);
+}
+.Avatar-border{
+    border-radius: 100%;
+}
+.Avatar-M{
+    width: 30px;
+    height: 30px;
+}
+
+.Avatar-P {
+    width: 20px;
+    height: 20px;
+}
+.Avatar-XS{
+    width: 300px;
+    height: 300px;
+}
+
+.Avatar-G {
+    width: 120px;
+    height: 120px;
+}
+@media(max-width: 600px){
+    .Avatar-G{
+        width: 100px;
+        height: 100px;
+    }
+}
+@media(max-width: 420px){
+    .Avatar-G{
+        width: 80px;
+        height: 80px;
+    }
+}
+
+.AvatarImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-bottom-left-radius: 10px;
+}
+
+.AvatarFallback {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--violet11);
+    font-size: 15px;
+    line-height: 1;
+    font-weight: 500;
+}

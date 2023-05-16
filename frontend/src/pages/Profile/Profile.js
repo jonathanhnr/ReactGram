@@ -4,7 +4,7 @@ import { uploads } from '../../utils/config';
 import Message from '../../components/Message';
 import { Link } from 'react-router-dom';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -14,9 +14,15 @@ import {
   resetMessage,
   getUserPhotos,
   deletePhoto,
-  updatePhoto,
+  updatePhoto, setActivePhoto as setActivePhotoAction
 } from '../../slices/photoSlice';
 import { BsFillEyeFill, BsPencilFill, BsXLg } from 'react-icons/bs';
+import NavBar from '../../components/NavBar';
+import Avatar from '../../components/Avatar';
+import Footer from '../../components/Footer';
+import ShareModal from '../../components/ShareModal';
+import { useActivePhoto } from '../../hooks/useActivePhoto';
+import Modal from '../../components/Modal';
 
 const Profile = () => {
   const { id } = useParams();
@@ -31,12 +37,19 @@ const Profile = () => {
   } = useSelector(state => {
     return state.photo;
   });
+  const setActivePhoto = (id) => {
+    dispatch(setActivePhotoAction(id));
+  };
+  const activePhoto = useActivePhoto();
+
 
   const [title, setTitle] = useState('');
   const [image, setImage] = useState('');
   const [editId, setEditId] = useState('');
   const [editImage, setEditImage] = useState('');
   const [editTitle, setEditTitle] = useState('');
+  const [activeModal, setActiveModal] = useState(false)
+  const [endImage, setEndImage] = useState("../../public/favicon.ico")
 
   const newPhotoForm = useRef();
   const editPhotoForm = useRef();
@@ -69,7 +82,9 @@ const Profile = () => {
 
     Object.keys(photoData).forEach(key => formData.append(key, photoData[key]));
 
-    dispatch(publishPhoto(formData));
+    dispatch(publishPhoto([formData, () => {
+      console.log('published')
+    }]));
 
     setTitle('');
 
@@ -115,92 +130,99 @@ const Profile = () => {
   }
 
   return (
-    <div id="profile">
-      <div className="profile-header">
-        {user.profileImage && (
-          <img src={`${uploads}/users/${user.profileImage}`} alt={user.name} />
+    <div className={'container'}>
+      <NavBar />
+      <div id="profile">
+        <div className="profile-header">
+          <div className={'ctn-img'}>
+            <Avatar size={'G'} src={`${uploads}/users/${user.profileImage}`} border={"R"}/>
+          </div>
+          <div className="profile-description">
+            <div
+              style={{gap: '30px', display: 'flex', alignItems:'center'}}>
+              <h2>{user.name}</h2>
+              <a href={"/profile"} className={"btn-edit"}>Editar perfil</a>
+            </div>
+            <p>{user.bio}</p>
+
+          </div>
+        </div>
+        <div style={{border:"1px solid #80808033", marginTop:"60px"}}></div>
+        <h2 style={{color:"white"}}>Publicações</h2>
+        {id === userAuth._id && (
+          <>
+            <div ref={newPhotoForm}></div>
+            <div className="edit-photo hide" ref={editPhotoForm}>
+             <div style={{display:"flex", justifyContent:"center"}}>
+               <p>editando</p>
+             </div>
+             <div className={"edit-container"}>
+               {editImage && (
+               <div style={{padding:"5px"}}>
+                 <Avatar size={"XS"} src={`${uploads}/photos/${editImage}`}/>
+               </div>
+
+               )}
+             <div>
+               <div style={{display:"flex", padding:"5px", alignItems:"center", gap:"10px"}}>
+                 <Avatar size={"P"} border={"R"} src={`${uploads}/users/${user.profileImage}`}/>
+                 <h2>{user.name}</h2>
+               </div>
+               <form className={"edit-text"} onSubmit={handleUpdate}>
+                 <div>
+                   <textarea
+                     className={"edit-text-area"}
+                     placeholder={'digite seu novo titulo'}
+                     onChange={e => setEditTitle(e.target.value)}
+                     value={editTitle || ''}
+                   />
+                 </div>
+                 <div style={{display:"flex", justifyContent:"space-around", marginBottom:"25px"}}>
+                   <input style={{backgroundColor:"#0095f6", borderRadius:"10px", padding:"4px 40px"}} type="submit" value="atualizar" />
+                   <button className={'cancel-btn'} onClick={handleCancelEdit}>
+                     cancelar edicao
+                   </button>
+                 </div>
+               </form>
+             </div>
+             </div>
+            </div>
+
+          </>
         )}
-        <div className="profile-description">
-          <h2>{user.name}</h2>
-          <p>{user.bio}</p>
-        </div>
-      </div>
-      {id === userAuth._id && (
-        <>
-          <div className="new-photo" ref={newPhotoForm}>
-            <h3>Compartilher algum momento seu:</h3>
-            <form onSubmit={submitHandle}>
-              <label>
-                <span>titulo para a foto:</span>
-                <input
-                  type="text"
-                  placeholder="Insira um titulo"
-                  onChange={e => setTitle(e.target.value)}
-                  value={title || ''}
-                />
-              </label>
-              <label>
-                <span>Imagem:</span>
-                <input type="file" onChange={handleFile} />
-              </label>
-              {!loadingPhoto && <input type="submit" value={'Postar'} />}
-              {loadingPhoto && (
-                <input type="submit" value="Aguarde ..." disabled />
-              )}
-            </form>
-          </div>
-          <div className="edit-photo hide" ref={editPhotoForm}>
-            <p>editando</p>
-            {editImage && (
-              <img src={`${uploads}/photos/${editImage}`} alt={editTitle} />
+        <div className="user-photos">
+
+          <div className="photos-container">
+            {photos &&
+              photos.map(photo => (
+                <div className="photo" key={photo._id}>
+                  {photo.image && (
+                    <img
+                      src={`${uploads}/photos/${photo.image}`}
+                      alt={photo.title}
+                    />
+                  )}
+                  {id === userAuth._id ? (
+                    <div className="actions" >
+                      <BsFillEyeFill onClick={() => setActivePhoto(photo._id)}/>
+                      <BsPencilFill onClick={() => handleEdit(photo)} />
+                      <BsXLg onClick={() => handleDelete(photo._id)} />
+                    </div>
+                  ) : (
+                    <a className="btn" onClick={() => setActivePhoto(photo._id)}>
+                      ver
+                    </a>
+                  )}
+                </div>
+              ))}
+            {activePhoto && (
+              <Modal photo={activePhoto} onClose={() => setActivePhoto(null)} />
             )}
-            <form onSubmit={handleUpdate}>
-              <input
-                type="text"
-                placeholder={'digite seu novo titulo'}
-                onChange={e => setEditTitle(e.target.value)}
-                value={editTitle || ''}
-              />
-              <input type="submit" value="atualizar" />
-              <button className={'cancel-btn'} onClick={handleCancelEdit}>
-                cancelar edicao
-              </button>
-            </form>
+            {photos.length === 0 && <p>Ainda não a fotos publicadas</p>}
           </div>
-          {errorPhoto && <Message msg={errorPhoto} type="error" />}
-          {messagePhoto && <Message msg={messagePhoto} type="success" />}
-        </>
-      )}
-      <div className="user-photos">
-        <h2>fotos publicadas</h2>
-        <div className="photos-container">
-          {photos &&
-            photos.map(photo => (
-              <div className="photo" key={photo._id}>
-                {photo.image && (
-                  <img
-                    src={`${uploads}/photos/${photo.image}`}
-                    alt={photo.title}
-                  />
-                )}
-                {id === userAuth._id ? (
-                  <div className="actions">
-                    <Link to={`/photos/${photo._id}`}>
-                      <BsFillEyeFill />
-                    </Link>
-                    <BsPencilFill onClick={() => handleEdit(photo)} />
-                    <BsXLg onClick={() => handleDelete(photo._id)} />
-                  </div>
-                ) : (
-                  <Link className="btn" to={`/photos/${photo._id}`}>
-                    ver
-                  </Link>
-                )}
-              </div>
-            ))}
-          {photos.length === 0 && <p>Ainda não a fotos publicadas</p>}
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
